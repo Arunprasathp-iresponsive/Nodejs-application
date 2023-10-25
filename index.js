@@ -6,11 +6,7 @@ const app = express();
 app.use(bodyParser.json());
 
 
-AWS.config.update({
-    region: 'us-east-1', 
-    accessKeyId: 'AKIATXCXGM2BU7NYJ3VY',
-    secretAccessKey: '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',
-});
+
 
 const sns = new AWS.SNS();
 const sqs = new AWS.SQS();
@@ -108,7 +104,9 @@ async function publishMessageToTopic(topicArn, message) {
   
     await sns.publish(params, (err, data) => {
         if(err){
-            console.log("")
+            console.log("err------>", err);
+        } else {
+          console.log("data-------->113", data);
         }
     }).promise();
 }
